@@ -1,0 +1,31 @@
+{
+  "_id": "{{@ system @}}",
+  "authentication": "basic",
+  "operations": {
+    "domains-list": {
+      "id_expression": "id",
+      "method": "GET",
+      "payload_property": "items",
+      "url": "v4/domains"
+    },
+    "events-list": {
+      "method": "GET",
+      "next_page_link": "{{ body.paging.next }}",
+      "next_page_termination_strategy": "same-response",
+      "params": {
+        "limit": 200
+      },
+      "payload_property": "items",
+      "url": "v3/{{ entity.name }}/events"
+    },
+    "messages-list": {
+      "method": "GET",
+      "url": "v3/domains/portal.sesam.io/messages/{{ entity.storage.key }}"
+    }
+  },
+  "password": "$SECRET(api_key)",
+  "type": "system:rest",
+  "url_pattern": "https://api.eu.mailgun.net/%s",
+  "username": "api",
+  "verify_ssl": true
+}

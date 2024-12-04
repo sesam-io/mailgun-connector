@@ -1,0 +1,18 @@
+{
+  "additional_parameters": {},
+  "auth": "api_key",
+  "datatypes": {
+    "domains": {
+      "template": "templates/domains.json"
+    },
+    "events": {
+      "template": "templates/events.json"
+    },
+    "messages": {
+      "template": "templates/messages.json"
+    }
+  },
+  "requires_service_api_access": true,
+  "system-template": "templates/system.json",
+  "use_webhook_secret": false
+}
