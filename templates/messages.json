@@ -2,6 +2,9 @@
   {
     "_id": "{{@ system @}}-{{@ datatype @}}-all",
     "namespaced_identifiers": false,
+    "pump": {
+      "rescan_cron_expression": "0 0 * * ?"
+    },
     "source": {
       "dataset": "{{@ system @}}-events-collect",
       "type": "dataset"
@@ -20,7 +23,12 @@
             [
               "add",
               "_id",
-              "_S.storage.key"
+              [
+                "concat",
+                "_S._id",
+                "-",
+                "_S.storage.key"
+              ]
             ],
             [
               "merge",

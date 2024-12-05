@@ -3,24 +3,24 @@
   "authentication": "basic",
   "operations": {
     "domains-list": {
-      "id_expression": "id",
+      "id_expression": "{{ id }}",
       "method": "GET",
       "payload_property": "items",
       "url": "v4/domains"
     },
     "events-list": {
       "method": "GET",
-      "next_page_link": "{{ body.paging.next }}",
-      "next_page_termination_strategy": "same-response",
+      "next_page_link": "{% if entity['items']|length > 0 %}{{ body.paging.next }}{% endif %}",
+      "next_page_termination_strategy": "next-page-link-empty",
+      "page_size": 200,
       "params": {
-        "limit": 200
+        "limit": "{{ page_size }}"
       },
-      "payload_property": "items",
       "url": "v3/{{ entity.name }}/events"
     },
     "messages-list": {
       "method": "GET",
-      "url": "v3/domains/portal.sesam.io/messages/{{ entity.storage.key }}"
+      "url": "v3/domains/{{ entity.sesam_domainName }}/messages/{{ entity.storage.key }}"
     }
   },
   "password": "$SECRET(api_key)",
